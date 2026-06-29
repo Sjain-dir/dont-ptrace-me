@@ -1,0 +1,22 @@
+[package]
+name = "dont-ptrace-me"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = []
+ptrace_check    = ["dep:nix"]
+procfs_check    = []
+breakpoint_scan = []
+all_checks      = ["ptrace_check", "procfs_check", "breakpoint_scan"]
+
+[dependencies]
+nix = { version = "0.29", features = ["ptrace"], optional = true }
+
+[[bin]]
+name = "dont-ptrace-me"
+path = "src/main.rs"
+
+[lib]
+name = "dont_ptrace_me"
+path = "src/lib.rs"
